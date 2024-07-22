@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use DDD\Domain\Websites\Website;
 use DDD\Domain\Pages\Resources\PageResource;
 use DDD\Domain\Pages\Page;
-use DDD\App\Services\Url\UrlService;
 use DDD\App\Controllers\Controller;
 
 class PageController extends Controller
@@ -27,16 +26,11 @@ class PageController extends Controller
 
     public function store(Website $website, Request $request)
     {
-        $page = $website->pages()->firstOrCreate(
-            [
-                'path' => UrlService::getPath($request->url)
-            ],
-            [
-                'title' => $request->title,
-                'url' => UrlService::getClean($request->url),
-                'path' => UrlService::getPath($request->url),
-            ]
-        );
+        $page = $website->pages()->create([
+            'title' => $request->title,
+            'url' => $request->url,
+            'path' => $request->url,
+        ]);
 
         return new PageResource($page);
     }
@@ -50,7 +44,8 @@ class PageController extends Controller
     {
         $page->update([
             'title' => $request->title,
-            'url' => UrlService::getClean($request->url),
+            'url' => $request->url,
+            'path' => $request->url,
         ]);
 
         return new PageResource($page);

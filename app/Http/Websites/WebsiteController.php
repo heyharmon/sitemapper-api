@@ -2,16 +2,10 @@
 
 namespace DDD\Http\Websites;
 
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Http\Request;
 use DDD\Domain\Websites\Website;
 use DDD\Domain\Websites\Resources\WebsiteResource;
-use DDD\Domain\Base\Organizations\Organization;
-use DDD\Domain\Funnels\Requests\FunnelUpdateRequest;
-use DDD\Domain\Funnels\Funnel;
 use DDD\App\Controllers\Controller;
-use DDD\App\Services\Url\UrlService;
 
 class WebsiteController extends Controller
 {
@@ -25,7 +19,7 @@ class WebsiteController extends Controller
     public function store(Request $request)
     {
         $website = Website::create([
-            'domain' => UrlService::getDomain($request->url),
+            'domain' => $request->url,
         ]);
 
         return new WebsiteResource($website);
@@ -39,7 +33,7 @@ class WebsiteController extends Controller
     public function update(Website $website, Request $request)
     {
         $website->update([
-            'domain' => UrlService::getDomain($request->url),
+            'domain' => $request->url,
         ]);
 
         return new WebsiteResource($website);

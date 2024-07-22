@@ -18,7 +18,7 @@ class WebsiteResource extends JsonResource
         return [
             'id' => $this->id,
             'domain' => $this->domain,
-            'pages' => PageResource::collection($this->pages),
+            'page_count' => $this->pages->count(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

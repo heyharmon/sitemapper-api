@@ -4,8 +4,9 @@ namespace DDD\Domain\Websites;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use DDD\Domain\Pages\Page;
-use DDD\Domain\Funnels\FunnelStep;
+use DDD\App\Services\Url\UrlService;
 
 class Website extends Model
 {
@@ -16,6 +17,11 @@ class Website extends Model
     ];
 
     protected $casts = [];
+
+    public function setDomainAttribute($value)
+    {
+        $this->attributes['domain'] = UrlService::getDomain($value);
+    }
 
     public function pages()
     {
