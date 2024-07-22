@@ -1,12 +1,12 @@
 <?php
 
-namespace Database\Factories\Domain\Users;
+namespace Database\Factories\Domain\Base\Users;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use DDD\Domain\Users\User;
-use DDD\Domain\Organizations\Organization;
+use DDD\Domain\Base\Users\User;
+use DDD\Domain\Base\Organizations\Organization;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\DDD\Models\User>

@@ -1,6 +1,6 @@
 <?php
 
-use DDD\Domain\Users\User;
+use DDD\Domain\Base\Users\User;
 
 it('it shows my user profile', function () {
     $user = User::factory()->create();

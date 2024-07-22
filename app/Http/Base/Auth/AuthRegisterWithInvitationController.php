@@ -5,8 +5,8 @@ namespace DDD\Http\Base\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
 use DDD\Http\Base\Auth\Requests\AuthRegisterWithInvitationRequest;
-use DDD\Domain\Users\User;
-use DDD\Domain\Organizations\Resources\OrganizationResource;
+use DDD\Domain\Base\Users\User;
+use DDD\Domain\Base\Organizations\Resources\OrganizationResource;
 use DDD\Domain\Base\Invitations\Invitation;
 use DDD\App\Controllers\Controller;
 

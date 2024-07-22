@@ -2,7 +2,7 @@
 
 namespace DDD\App\Providers;
 
-use DDD\Domain\Organizations\Organization;
+use DDD\Domain\Base\Organizations\Organization;
 // Vendors
 use Illuminate\Support\ServiceProvider;
 // Domains
@@ -30,6 +30,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // $this->app->bind(CDNInterface::class, DigitalOceanCDNService::class);
-        Cashier::useCustomerModel(Organization::class);
+        // Cashier::useCustomerModel(Organization::class);
     }
 }

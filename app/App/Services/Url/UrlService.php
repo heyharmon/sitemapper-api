@@ -11,11 +11,11 @@ class UrlService
     {
         return $url_parts = [
             'url' => $url,
-            'clean' => $this->getClean($url),
-            'scheme' => $this->getScheme($url),
-            'host' => $this->getHost($url),
-            'domain' => $this->getDomain($url),
-            'path' => $this->getPath($url),
+            'clean' => $this->getClean($url), // e.g., "https://google.com"
+            'scheme' => $this->getScheme($url), // e.g., "https"
+            'host' => $this->getHost($url), // e.g., "www.google.com"
+            'domain' => $this->getDomain($url), // e.g., "google.com"
+            'path' => $this->getPath($url), // e.g., "/foo/bar"
         ];
     }
 
@@ -50,7 +50,7 @@ class UrlService
     /*
      * Get url host
      *
-     * e.g., "www.heyharmon.com"
+     * e.g., "www.google.com"
      */
     public static function getHost($url)
     {
@@ -65,7 +65,7 @@ class UrlService
     /*
      * Get url domain
      *
-     * e.g., "heyharmon.com"
+     * e.g., "google.com"
      */
     public static function getDomain($url)
     {
@@ -97,6 +97,6 @@ class UrlService
         }
 
         // No path in $url
-        return '';
+        return '/';
     }
 }

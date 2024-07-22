@@ -37,14 +37,6 @@ return [
         'puppeteerActor' => env('APIFY_PUPPETEER_ACTOR'),
     ],
 
-    'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'project_id' => env('GOOGLE_PROJECT_ID'),
-        'redirect_uri' => env('GOOGLE_REDIRECT_URI'),
-        'javascript_origins' => env('GOOGLE_JAVASCRIPT_ORIGINS'),
-    ],
-
     'openai' => [
         'api_key' => env('OPENAI_API_KEY'),
         'organization' => env('OPENAI_ORGANIZATION'),

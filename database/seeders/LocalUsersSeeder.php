@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DDD\Domain\Users\User;
+use DDD\Domain\Base\Users\User;
 
 class LocalUsersSeeder extends Seeder
 {
