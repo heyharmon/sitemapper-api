@@ -9,7 +9,7 @@ class StoreFileAction
 {
     use AsAction;
     
-    function handle($file, String $folder)
+    function handle($file, String $folder = 'public')
     {
         $disk = config('filesystems.default');
         
@@ -20,11 +20,12 @@ class StoreFileAction
                 'path' => $path
             ],
             [
-            'path' => $path,
-            'name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-            'filename' => basename($path),
-            'extension' => $file->getClientOriginalExtension(),
-            'disk' => $disk
+                'path' => $path,
+                'name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'filename' => basename($path),
+                'extension' => $file->getClientOriginalExtension(),
+                'disk' => $disk,
+                'folder' => $folder
             ]
         );
 

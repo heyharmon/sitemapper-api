@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('website_id')->constrained();
+            $table->foreignId('website_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('url');
             $table->string('path')->unique();

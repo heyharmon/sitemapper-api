@@ -28,6 +28,7 @@ class UpdateFileAction
             'filename' => basename($newPath),
             'extension' => $updatedFile->getClientOriginalExtension(),
             'disk' => $disk,
+            'folder' => $updatedFile->folder
         ]);
 
         return $file;

@@ -19,6 +19,8 @@ class FileResource extends JsonResource
             'path' => $this->path,
             'url' => $this->getStorageUrl(),
             'extension' => $this->extension,
+            'disk' => $this->disk,
+            'folder' => $this->folder,
         ];
     }
 }

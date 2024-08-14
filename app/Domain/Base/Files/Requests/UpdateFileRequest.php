@@ -24,7 +24,7 @@ class UpdateFileRequest extends FormRequest
     {
         return [
             'file' => 'required|max:100000', // Max 100mb
-            // 'folder' => 'required|string',
+            'folder' => 'string',
         ];
     }
 

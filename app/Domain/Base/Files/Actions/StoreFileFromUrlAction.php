@@ -33,6 +33,7 @@ class StoreFileFromUrlAction
                     'filename' => basename($path),
                     'extension' => $extension,
                     'disk' => $disk,
+                    'folder' => $folder
                 ]
             );
 

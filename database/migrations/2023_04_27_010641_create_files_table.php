@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('path');
             $table->string('extension');
             $table->string('disk');
+            $table->string('folder')->default('public');
             $table->timestamps();
         });
     }

@@ -4,11 +4,11 @@ namespace DDD\Http\Websites;
 
 use Throwable;
 use Illuminate\Http\Request;
+use DDD\Domain\Websites\Actions\StoreWebsiteScreenshotAction;
+use DDD\Domain\Websites\Actions\StoreWebsiteFaviconAction;
 use DDD\Domain\Websites\Website;
 use DDD\Domain\Websites\Resources\WebsiteResource;
 use DDD\App\Controllers\Controller;
-use DDD\App\Actions\GetScreenshotAction;
-use DDD\App\Actions\GetFaviconAction;
 
 class WebsiteController extends Controller
 {
@@ -21,23 +21,11 @@ class WebsiteController extends Controller
 
     public function store(Request $request)
     {
-        $website = new Website([
+        $website = Website::create([
             'domain' => $request->url,
         ]);
 
-        try {
-            $screenshot = GetScreenshotAction::run('https://' . $website->domain);
-            $favicon = GetFaviconAction::run($website->domain);
-
-            // Store website
-            $website->screenshot_file_id = $screenshot->id;
-            $website->favicon_file_id = $favicon->id;
-            $website->save();
-    
-            return new WebsiteResource($website);
-        } catch (Throwable $t) {
-            return response()->json(['error' => 'Failed to create website: ' . $t], 500);
-        }
+        return new WebsiteResource($website);
     }
 
     public function show(Website $website)

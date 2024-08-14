@@ -17,11 +17,9 @@ class GetScreenshotAction
     function handle(string $url)
     {
         try {
-            $screenshotUrl = $this->screenshotter->take($url, '1200', '1200');
+            $screenshotUrl = $this->screenshotter->take('https://' . $url, '1200', '1200');
 
             $file = StoreFileFromUrlAction::run($screenshotUrl, 'screenshots');
-
-            // dd($file);
     
             return $file;
         } catch (\Exception $e) {
