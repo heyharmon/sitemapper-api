@@ -13,19 +13,12 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organization_id');
-            $table->foreignId('user_id');
             $table->string('name');
             $table->string('filename');
             $table->string('path');
             $table->string('extension');
-            $table->string('mime');
             $table->string('disk');
             $table->timestamps();
-
-            // Foreign constraints
-            $table->foreign('organization_id')->references('id')->on('organizations');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

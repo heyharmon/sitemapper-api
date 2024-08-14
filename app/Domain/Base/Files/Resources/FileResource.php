@@ -19,7 +19,6 @@ class FileResource extends JsonResource
             'path' => $this->path,
             'url' => $this->getStorageUrl(),
             'extension' => $this->extension,
-            'mime' => $this->mime,
         ];
     }
 }

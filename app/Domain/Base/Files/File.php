@@ -9,14 +9,12 @@ use DDD\App\Traits\BelongsToOrganization;
 
 class File extends Model
 {
-    use BelongsToOrganization,
-        BelongsToUser,
-        HasFactory;
+    use HasFactory;
 
     protected $guarded = ['id'];
 
     public function getStorageUrl()
     {
-        return config('cdn.cdn_url') . '/' . $this->path;
+        return config('cdn.cdn_url') . $this->path;
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Exception;
 
-class StoreFileRequest extends FormRequest
+class UpdateFileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class StoreFileRequest extends FormRequest
     {
         return [
             'file' => 'required|max:100000', // Max 100mb
-            'folder' => 'required|string',
+            // 'folder' => 'required|string',
         ];
     }
 
