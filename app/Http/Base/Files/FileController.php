@@ -48,7 +48,7 @@ class FileController extends Controller
     {
         $file->delete();
 
-        Storage::delete($file->path);
+        // Storage::delete($file->path);
 
         return response()->json(['message' => 'File destroyed'], 200);
     }

@@ -4,8 +4,6 @@ namespace DDD\Http\Websites;
 
 use Throwable;
 use Illuminate\Http\Request;
-use DDD\Domain\Websites\Actions\StoreWebsiteScreenshotAction;
-use DDD\Domain\Websites\Actions\StoreWebsiteFaviconAction;
 use DDD\Domain\Websites\Website;
 use DDD\Domain\Websites\Resources\WebsiteResource;
 use DDD\App\Controllers\Controller;

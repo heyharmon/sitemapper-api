@@ -3,8 +3,22 @@
 use Illuminate\Support\Facades\Route;
 use DDD\Http\Websites\WebsiteController;
 use DDD\Http\Pages\PageController;
+use DDD\Http\Companies\CompanyImportController;
+use DDD\Http\Companies\CompanyController;
 
 Route::middleware('auth:sanctum')->group(function() {
+
+    // Companies
+    Route::prefix('companies')->group(function() {
+        Route::get('/', [CompanyController::class, 'index']);
+        Route::post('/', [CompanyController::class, 'store']);
+        Route::get('/{company}', [CompanyController::class, 'show']);
+        Route::put('/{company}', [CompanyController::class, 'update']);
+        Route::delete('/{company}', [CompanyController::class, 'destroy']);
+
+        // Import
+        Route::post('/import/outscraper', [CompanyImportController::class, 'outscraper']);
+    });
 
     // Websites
     Route::prefix('websites')->group(function() {

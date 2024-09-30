@@ -4,12 +4,13 @@ namespace DDD\Domain\Websites;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use DDD\Domain\Websites\Actions\StoreWebsiteScreenshotAction;
-use DDD\Domain\Websites\Actions\StoreWebsiteFaviconAction;
+// use Illuminate\Database\Eloquent\Casts\Attribute;
+// use DDD\Domain\Websites\Actions\StoreWebsiteScreenshotAction;
+// use DDD\Domain\Websites\Actions\StoreWebsiteFaviconAction;
 use DDD\Domain\Pages\Page;
 use DDD\Domain\Base\Files\File;
 use DDD\App\Services\Url\UrlService;
+use DDD\App\Services\Screenshot\ThumbioService;
 
 class Website extends Model
 {
@@ -19,28 +20,29 @@ class Website extends Model
         'id',
     ];
 
-    protected $casts = [];
-
     public static function boot()
     {
         parent::boot();
 
         self::created(function (Website $website) {
-            StoreWebsiteScreenshotAction::run($website);
-            StoreWebsiteFaviconAction::run($website);
+            $screenshotter = new ThumbioService();
+
+            $website->update([
+                'screenshot_url' => $screenshotter->getScreenshot($website->domain)
+            ]);
+
+            // StoreWebsiteFaviconAction::run($website);
         });
 
-        self::deleted(function (Website $website) {
-            File::find($website->screenshot_file_id)->delete();
-            File::find($website->favicon_file_id)->delete();
-            // $website->screenshot()->delete();
-            // $website->favicon()->delete();
-        });
+        // self::deleted(function (Website $website) {
+        //     File::find($website->screenshot_file_id)->delete();
+        //     // File::find($website->favicon_file_id)->delete();
+        // });
     }
 
     public function setDomainAttribute($value)
     {
-        $this->attributes['domain'] = UrlService::getDomain($value);
+        $this->attributes['domain'] = UrlService::getClean($value);
     }
 
     public function pages()

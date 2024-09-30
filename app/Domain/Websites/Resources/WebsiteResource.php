@@ -20,8 +20,9 @@ class WebsiteResource extends JsonResource
             'id' => $this->id,
             'domain' => $this->domain,
             'page_count' => $this->pages->count(),
-            'screenshot' => new FileResource($this->screenshot),
-            'favicon' => new FileResource($this->favicon),
+            'screenshot_url' => $this->screenshot_url,
+            // 'screenshot' => new FileResource($this->screenshot),
+            // 'favicon' => new FileResource($this->favicon),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
