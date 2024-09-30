@@ -42,7 +42,7 @@ return [
         'organization' => env('OPENAI_ORGANIZATION'),
     ],
 
-    'thumbio' => [
+    'thumio' => [
         'token' => env('THUMBIO_TOKEN'),
     ],
 

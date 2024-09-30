@@ -12,7 +12,7 @@ class WebsiteController extends Controller
 {
     public function index()
     {
-        $websites = Website::all();
+        $websites = Website::paginate(20);
 
         return WebsiteResource::collection($websites);
     }
