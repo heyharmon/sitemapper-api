@@ -16,6 +16,7 @@ class WebsiteResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'rating' => $this->rating,
             'domain' => $this->domain,
             'page_count' => $this->pages->count(),
             'screenshot_url' => $this->screenshot_url,
