@@ -19,9 +19,7 @@ class WebsiteController extends Controller
 
     public function store(Request $request)
     {
-        $website = Website::create([
-            'domain' => $request->url,
-        ]);
+        $website = Website::create($request->all());
 
         return new WebsiteResource($website);
     }
