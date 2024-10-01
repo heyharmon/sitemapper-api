@@ -54,10 +54,12 @@ class CompanyImportController extends Controller
 
             // Manually map CSV columns to database columns during updateOrCreate
             $company = Company::updateOrCreate(
-                ['name' => $rowData['owner_title']], // Identifier column
+                [
+                    'name' => $rowData['owner_title'] // Identifier column
+                ],
                 [
                     'name'  => $rowData['name'],
-                    'type'  => 'mover',
+                    'category'  => $rowData['category'],
                     'phone'  => $rowData['phone'],
                     'address' => $rowData['full_address'],
                     'state'  => $rowData['state'],
@@ -72,11 +74,12 @@ class CompanyImportController extends Controller
             );
 
             if ($rowData['site'] !== '') {
-                $website = Website::firstOrCreate(
-                    ['domain' => UrlService::getHost($rowData['site'])],
-                );
+                $domain = UrlService::getScheme($rowData['site']) . '://' . UrlService::getHost($rowData['site']);
+
+                $website = Website::firstOrCreate(['domain' => $domain]);
 
                 $company->website()->associate($website);
+
                 $company->save();
             }
         }

@@ -13,9 +13,16 @@ class LocalUsersSeeder extends Seeder
     public function run(): void
     {
         $users = [
-            [
+            [ // Postman user
                 'name' => 'Jane Doe',
                 'email' => 'jane@doe.com',
+                'role' => 'editor',
+                'organization_id' => 1,
+                'password' => bcrypt(config('seeding.user_password')),
+            ],
+            [ // Local frontend user
+                'name' => 'John Doe',
+                'email' => 'john@doe.com',
                 'role' => 'editor',
                 'organization_id' => 1,
                 'password' => bcrypt(config('seeding.user_password')),

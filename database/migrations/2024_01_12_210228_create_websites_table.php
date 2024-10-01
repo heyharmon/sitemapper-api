@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('websites', function (Blueprint $table) {
             $table->id();
+            $table->integer('rating')->nullable()->default(0);
             $table->string('domain')->nullable();
-            $table->string('screenshot_url')->nullable();
+            // $table->string('screenshot_url')->nullable();
             // $table->foreignId('screenshot_file_id')->nullable();
             // $table->foreignId('favicon_file_id')->nullable();
             $table->timestamps();

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use DDD\Domain\Pages\Page;
 use DDD\Domain\Base\Files\File;
 use DDD\App\Services\Url\UrlService;
-use DDD\App\Services\Screenshot\ThumbioService;
+// use DDD\App\Services\Screenshot\ThumbioService;
 
 class Website extends Model
 {
@@ -20,29 +20,34 @@ class Website extends Model
         'id',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
+    // public static function boot()
+    // {
+    //     parent::boot();
 
-        self::created(function (Website $website) {
-            $screenshotter = new ThumbioService();
+    //     self::created(function (Website $website) {
+    //         $screenshotter = new ThumbioService();
 
-            $website->update([
-                'screenshot_url' => $screenshotter->getScreenshot($website->domain)
-            ]);
+    //         $website->update([
+    //             'screenshot_url' => $screenshotter->getScreenshot($website->domain)
+    //         ]);
 
-            // StoreWebsiteFaviconAction::run($website);
-        });
+    //         // StoreWebsiteFaviconAction::run($website);
+    //     });
 
-        // self::deleted(function (Website $website) {
-        //     File::find($website->screenshot_file_id)->delete();
-        //     // File::find($website->favicon_file_id)->delete();
-        // });
-    }
+    //     // self::deleted(function (Website $website) {
+    //     //     File::find($website->screenshot_file_id)->delete();
+    //     //     // File::find($website->favicon_file_id)->delete();
+    //     // });
+    // }
 
     public function setDomainAttribute($value)
     {
-        $this->attributes['domain'] = UrlService::getClean($value);
+        $this->attributes['domain'] = UrlService::getScheme($value) . '://' . UrlService::getHost($value);
+    }
+
+    public function getScreenshotUrlAttribute()
+    {
+        return 'https://image.thum.io/get/auth/71004-cb31c5c1adfff09b79f63b9e3f4cb915/png/noanimate/wait/5/' . $this->domain;
     }
 
     public function pages()
