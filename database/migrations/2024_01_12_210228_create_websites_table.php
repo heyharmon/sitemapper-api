@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('rating')->nullable()->default(0);
             $table->string('domain')->nullable();
+            $table->string('url')->nullable();
             // $table->string('screenshot_url')->nullable();
             // $table->foreignId('screenshot_file_id')->nullable();
             // $table->foreignId('favicon_file_id')->nullable();

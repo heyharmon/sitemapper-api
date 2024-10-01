@@ -40,14 +40,15 @@ class Website extends Model
     //     // });
     // }
 
-    public function setDomainAttribute($value)
-    {
-        $this->attributes['domain'] = UrlService::getScheme($value) . '://' . UrlService::getHost($value);
-    }
+    // public function setDomainAttribute($value)
+    // {
+    //     // $this->attributes['domain'] = UrlService::getScheme($value) . '://' . UrlService::getHost($value);
+    //     $this->attributes['domain'] = UrlService::getdomain($value);
+    // }
 
     public function getScreenshotUrlAttribute()
     {
-        return 'https://image.thum.io/get/auth/71004-cb31c5c1adfff09b79f63b9e3f4cb915/png/noanimate/wait/5/' . $this->domain;
+        return 'https://image.thum.io/get/auth/71004-cb31c5c1adfff09b79f63b9e3f4cb915/png/noanimate/wait/5/' . $this->url;
     }
 
     public function pages()
@@ -55,13 +56,13 @@ class Website extends Model
         return $this->hasMany(Page::class);
     }
 
-    public function screenshot()
-    {
-        return $this->belongsTo(File::class, 'screenshot_file_id');
-    }
+    // public function screenshot()
+    // {
+    //     return $this->belongsTo(File::class, 'screenshot_file_id');
+    // }
 
-    public function favicon()
-    {
-        return $this->belongsTo(File::class, 'favicon_file_id');
-    }
+    // public function favicon()
+    // {
+    //     return $this->belongsTo(File::class, 'favicon_file_id');
+    // }
 }

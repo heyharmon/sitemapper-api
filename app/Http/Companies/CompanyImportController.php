@@ -74,9 +74,10 @@ class CompanyImportController extends Controller
             );
 
             if ($rowData['site'] !== '') {
-                $domain = UrlService::getScheme($rowData['site']) . '://' . UrlService::getHost($rowData['site']);
-
-                $website = Website::firstOrCreate(['domain' => $domain]);
+                $website = Website::firstOrCreate(
+                    ['domain' => UrlService::getDomain($rowData['site'])],
+                    ['url' => UrlService::getScheme($rowData['site']) . '://' . UrlService::getHost($rowData['site'])]
+                );
 
                 $company->website()->associate($website);
 
