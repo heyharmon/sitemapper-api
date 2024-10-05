@@ -49,4 +49,9 @@ return [
     'screenshotone' => [
         'accesskey' => env('SCREENSHOTONE_ACCESSKEY'),
     ],
+
+    'dataforseo' => [
+        'login' => env('DATAFORSEO_LOGIN'),
+        'password' => env('DATAFORSEO_PASSWORD'),
+    ],
 ];

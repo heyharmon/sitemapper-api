@@ -2,6 +2,8 @@
 
 namespace DDD\Http\Companies;
 
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Http\Request;
 use DDD\Domain\Companies\Resources\CompanyResource;
 use DDD\Domain\Companies\Company;
@@ -11,7 +13,13 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::paginate(20);
+        $companies = QueryBuilder::for(Company::class)
+            ->allowedFilters([
+                AllowedFilter::exact('category')
+            ])
+            ->orderBy('id', 'asc')
+            ->paginate(50)
+            ->appends(request()->query());
 
         return CompanyResource::collection($companies);
     }

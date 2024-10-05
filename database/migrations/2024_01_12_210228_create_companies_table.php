@@ -23,13 +23,15 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('zip')->nullable();
-            $table->decimal('latitude')->nullable();
-            $table->decimal('longitude')->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->string('google_place_id')->nullable();
             $table->decimal('google_rating')->nullable();
             $table->integer('google_reviews')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['category', 'state', 'city']);
         });
     }
 

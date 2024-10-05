@@ -15,14 +15,17 @@ return new class extends Migration
     {
         Schema::create('websites', function (Blueprint $table) {
             $table->id();
-            $table->integer('rating')->nullable()->default(0);
             $table->string('domain')->nullable();
             $table->string('url')->nullable();
+            $table->integer('rank')->nullable();
+            $table->integer('design_rating')->nullable();
             // $table->string('screenshot_url')->nullable();
             // $table->foreignId('screenshot_file_id')->nullable();
             // $table->foreignId('favicon_file_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index(['rank', 'design_rating']);
         });
     }
 

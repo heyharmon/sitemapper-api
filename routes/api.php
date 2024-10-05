@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use DDD\Http\Websites\WebsitePageCountController;
 use DDD\Http\Websites\WebsiteController;
 use DDD\Http\Pages\PageController;
 use DDD\Http\Companies\CompanyImportController;
@@ -27,6 +28,9 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('/{website}', [WebsiteController::class, 'show']);
         Route::put('/{website}', [WebsiteController::class, 'update']);
         Route::delete('/{website}', [WebsiteController::class, 'destroy']);
+
+        // Actions
+        Route::post('/{website}/get-page-count', [WebsitePageCountController::class, 'store']);
     });
 
     // Pages
