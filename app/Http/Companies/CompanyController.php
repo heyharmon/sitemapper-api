@@ -7,15 +7,18 @@ use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Http\Request;
 use DDD\Domain\Companies\Resources\CompanyResource;
 use DDD\Domain\Companies\Company;
+use DDD\App\Filters\FilterNullOrNot;
 use DDD\App\Controllers\Controller;
 
 class CompanyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // return $request;
         $companies = QueryBuilder::for(Company::class)
             ->allowedFilters([
-                AllowedFilter::exact('category')
+                AllowedFilter::exact('category'),
+                AllowedFilter::custom('website_id', new FilterNullOrNot()),
             ])
             ->orderBy('id', 'asc')
             ->paginate(50)
