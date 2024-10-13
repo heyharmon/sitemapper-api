@@ -20,6 +20,7 @@ class CompanyController extends Controller
                 AllowedFilter::exact('category'),
                 AllowedFilter::custom('website_id', new FilterNullOrNot()),
             ])
+            ->withCount('contacts')
             ->orderBy('id', 'asc')
             ->paginate(50)
             ->appends(request()->query());

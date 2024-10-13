@@ -22,6 +22,7 @@ class CompanyResource extends JsonResource
             'category' => $this->category,
             'website' => new WebsiteResource($this->website),
             'contacts' => ContactResource::collection($this->whenLoaded('contacts')),
+            'contacts_count' => $this->when(isset($this->contacts_count), $this->contacts_count),
             'phone' => $this->phone,
             'address' => $this->address,
             'state' => $this->state,
