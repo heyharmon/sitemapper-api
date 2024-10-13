@@ -4,7 +4,7 @@ namespace DDD\Domain\Companies\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use DDD\Domain\websites\Resources\WebsiteResource;
-use DDD\Domain\Base\Files\Resources\FileResource;
+use DDD\Domain\Contacts\Resources\ContactResource;
 
 class CompanyResource extends JsonResource
 {
@@ -21,6 +21,7 @@ class CompanyResource extends JsonResource
             'name' => $this->name,
             'category' => $this->category,
             'website' => new WebsiteResource($this->website),
+            'contacts' => ContactResource::collection($this->whenLoaded('contacts')),
             'phone' => $this->phone,
             'address' => $this->address,
             'state' => $this->state,
@@ -28,7 +29,7 @@ class CompanyResource extends JsonResource
             'zip' => $this->zip,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'place_id' => $this->google_place_id,
+            'google_place_id' => $this->google_place_id,
             'google_rating' => $this->google_rating,
             'google_reviews' => $this->google_reviews,
             'created_at' => $this->created_at,

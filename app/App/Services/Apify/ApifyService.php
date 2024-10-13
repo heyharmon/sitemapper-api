@@ -2,6 +2,7 @@
 
 namespace DDD\App\Services\Apify;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
 class ApifyService
@@ -24,10 +25,14 @@ class ApifyService
      */
     public function runActor(string $actorId, array $input): string
     {
+        Log::info($input);
         $response = Http::withToken($this->apiToken)
             ->post("{$this->baseUrl}/acts/{$actorId}/runs", $input);
 
         $data = $response->json();
+
+        // Log $data to see what the response looks like
+        Log::info($data);
 
         return $data['data']['id'];
     }

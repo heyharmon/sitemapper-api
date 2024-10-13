@@ -26,11 +26,11 @@ class RunApifyActorAction
      *
      * @param string $actorId
      * @param array $input
-     * @param string $processorClass
+     * @param string $handlerClass
      * @param ApifyService $apifyService
      * @return void
      */
-    public function handle(string $actorId, array $input, string $processorClass)
+    public function handle(string $actorId, array $input, string $handlerClass)
     {
         // Start the actor run
         $runId = $this->service->runActor($actorId, $input);
@@ -49,7 +49,7 @@ class RunApifyActorAction
 
                 if ($result) {
                     // Instantiate the handler class and process the result
-                    $handler = app($processorClass);
+                    $handler = app($handlerClass);
                     $handler->process($result);
                 }
 

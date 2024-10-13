@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use DDD\Http\Websites\WebsiteController;
 use DDD\Http\Pages\PageController;
+use DDD\Http\Contacts\ContactController;
 use DDD\Http\Companies\CompanyImportController;
+use DDD\Http\Companies\CompanyEnrichmentController;
 use DDD\Http\Companies\CompanyController;
-use DDD\Http\Companies\CompanyBatchController;
 
 Route::middleware('auth:sanctum')->group(function() {
 
@@ -20,12 +21,22 @@ Route::middleware('auth:sanctum')->group(function() {
         // Import
         Route::post('/import/outscraper', [CompanyImportController::class, 'outscraper']);
 
-        // Batch
-        Route::post('/get-websites-page-count', [CompanyBatchController::class, 'getWebsitesPageCount']);
+        // Enrich
+        Route::post('/get-websites-page-count', [CompanyEnrichmentController::class, 'getWebsitesPageCount']);
+        Route::post('/get-utah-principals', [CompanyEnrichmentController::class, 'getUtahPrincipals']);
+    });
+
+    // Contacts
+    Route::prefix('companies/{company}/contacts')->group(function() {
+        Route::get('/', [ContactController::class, 'index']);
+        Route::post('/', [ContactController::class, 'store']);
+        Route::get('/{contact}', [ContactController::class, 'show']);
+        Route::put('/{contact}', [ContactController::class, 'update']);
+        Route::delete('/{contact}', [ContactController::class, 'destroy']);
     });
 
     // Websites
-    Route::prefix('websites')->group(function() {
+    Route::prefix('companies/{company}/websites')->group(function() {
         Route::get('/', [WebsiteController::class, 'index']);
         Route::post('/', [WebsiteController::class, 'store']);
         Route::get('/{website}', [WebsiteController::class, 'show']);
@@ -34,7 +45,7 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     // Pages
-    Route::prefix('websites/{website}')->group(function() {
+    Route::prefix('companies/{company}/websites/{website}')->group(function() {
         Route::get('pages/', [PageController::class, 'index']);
         Route::post('pages/', [PageController::class, 'store']);
         Route::get('pages/{page}', [PageController::class, 'show']);
