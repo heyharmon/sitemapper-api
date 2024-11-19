@@ -7,6 +7,7 @@ use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use DDD\Domain\Companies\Sorts\CompanyWebsiteRankSort;
 use DDD\Domain\Companies\Sorts\CompanyWebsitePageCountSort;
 use DDD\Domain\Companies\Resources\CompanyResource;
 use DDD\Domain\Companies\Company;
@@ -21,14 +22,17 @@ class CompanyController extends Controller
         $companies = QueryBuilder::for(Company::class)
             ->allowedFilters([
                 AllowedFilter::exact('category'),
+                AllowedFilter::exact('city'),
                 AllowedFilter::exact('website.design_rating'),
                 AllowedFilter::custom('website_id', new FilterNullOrNot()),
             ])
             ->allowedSorts([
                 'name', 
                 'contacts_count', 
+                'google_rating', 
                 'google_reviews', 
                 AllowedSort::custom('page_count', new CompanyWebsitePageCountSort()),
+                AllowedSort::custom('website_rank', new CompanyWebsiteRankSort()),
             ])
             ->withCount('contacts')
             ->orderBy('id', 'asc')
